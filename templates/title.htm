@@ -1,0 +1,34 @@
+<h1>Title</h1>
+
+<!-- <div class="row">
+    <div class="col-xs-12">
+        <ul ng-repeat="x in titlenew | orderBy: '-count'">
+            <li>{{x.name}} - {{x.count}}</li>
+        </ul>
+    </div>
+</div> -->
+
+<div class="container">
+        <table class="table table-bordered table-striped table-hover" >
+            <tbody >
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                </tr>
+                <tr ng-repeat="x in titlenew | orderBy: '-count'">
+                      <td >
+                          {{x.name}}
+                      </td>
+                  <td >
+                      {{x.count}}
+                  </td>
+            </tr>
+            </tbody>
+        </table>
+  </div>
+
+  

@@ -1,0 +1,27 @@
+<h1>overview</h1>
+<p>total job count = {{jobArr.length}}</p>
+<div class="container">
+
+      
+<span>  Current limit = {{limit}}</span>
+<button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
+<button ng-click="moveForward()">forward</button>
+      <table class="table table-bordered table-striped table-hover" >
+          <tbody >
+              <tr ng-repeat="(k,x) in jobArr | limitTo:1">
+                    <th ng-repeat="(key,val) in x | limitTo:1">
+                        {{key}}
+                    </th>
+                </tr>
+                <tr ng-repeat="(k,x) in jobArr | limitTo:limit:begin">
+                <td ng-repeat="(key,val) in x ">
+                    {{val}}
+                </td>
+              </tr>
+              <!-- <tr ng-repeat="item in vm.items">
+                    <td>{{$index}}</td>
+                    <td>{{item}}</td>
+                </tr> -->
+          </tbody>
+      </table>
+</div>
