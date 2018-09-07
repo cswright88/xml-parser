@@ -35,9 +35,14 @@ class Parsexml extends dlXML{
         // $this->limit = $limit;
     }
 
-    public function parse($limit = 10000){
+    public function parse($clickcast = false){
         $xml = self::download();
-        $job = $xml->job;
+        $job;
+        if($clickcast == false){
+            $job = $xml->job;    
+        }else{
+            $job = $xml->jobs->job;
+        }
         $obj = array();
                 foreach($job as $el){
                     $job_arr = array();

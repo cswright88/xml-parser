@@ -1,9 +1,10 @@
 var ninjaapp = angular.module('app', ["ngRoute"]);
 ninjaapp.controller('ctrl', ['$scope', function($scope) {
-    $scope.origURL = "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml"
+    $scope.origURL = ""
     $scope.url = $scope.origURL;
     $scope.cityMsg="this is the city stuff";
-    $scope.values = "referencenumber,title,city,price,cpc";
+    $scope.values = "title,city,price,cpc";
+    $scope.clickcast = false;
     $scope.limit = 100;
     $scope.begin = 0
     $scope.jobArr = [];
@@ -58,7 +59,11 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
 
     // moveBack()
     $scope.moveBack = function(){
-        $scope.begin -= $scope.limit;
+        if($scope.begin - $scope.limit <= 0){
+            $scope.begin = 0;
+        }else{
+            $scope.begin -= $scope.limit;
+        }
     }
         // moveForward()
     $scope.moveForward = function(){
