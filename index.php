@@ -71,9 +71,39 @@ input[type=text] {
         </div>
       </form>
       <?php
-          error_reporting(0);
-          $url = $_POST['url'];
-          $values =  explode(",",$_POST['values']);
+          // error_reporting(0);
+          // $url = $_POST['url'];
+          function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+          }
+          if (empty($_POST["url"])) {
+            $url = "";
+          } else{
+            $website = test_input($_POST["url"]);
+            // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+              echo "Invalid URL"; 
+            }else {
+              $url = $_POST['url'];
+            }
+          } 
+        
+          // $values =  explode(",",$_POST['values']);
+          // /([a-zA-Z,]*){0,}/  -- regex to only allow commas an letters
+          if (empty($_POST["values"])) {
+            $values = "";
+          } else{
+            $valcheck = $_POST["values"];
+            // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+            if (preg_match("/^[a-zA-Z0-9,]+$/i",$valcheck)) {
+              $values = explode(",",$_POST['values']);
+            }else {
+              echo "Invalid values - make sure there are no whitespaces.  Letters, numbers, and commas are allowed"; 
+            }
+          } 
           // $clickcast = $_POST['clickcast'];
           // $clickcast = false;
           if(!isset($_POST['clickcast']))
