@@ -1,11 +1,23 @@
-<h1>overview</h1>
-<p>total job count = {{jobArr.length}}</p>
-<p class="text-danger">average bid (cpc): {{ calculateAverage(jobArr, "cpc") | number : fractionSize }} </p>
-<p class="text-danger">average bid (price): {{ calculateAverage(jobArr, "price") | number : fractionSize }} </p>
+<h1>Overview</h1>
+
 <div class="container">
-
-      
-
+    
+    <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow col-sm-4">
+                <div class="card-header bg-secondary text-white">total job count</div><div class="card-body">{{jobArr.length}}</div>
+            </div>
+            <div class="card mb-4 box-shadow col-sm-4">
+                <div class="card-header bg-secondary text-white">average bid (cpc)</div>
+                    <div class="card-body">{{ calculateAverage(jobArr, "cpc") | number : fractionSize }}</div>
+            </div>
+            <div class="card mb-4 box-shadow col-sm-4">
+                <div class="card-header bg-secondary text-white">average bid (price)</div><div class="card-body">{{ calculateAverage(jobArr, "price") | number : fractionSize }}</div>
+            </div>
+    </div> 
+</div>
+<br />
+<hr />
+<br />
 <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
 <button ng-click="moveForward()">forward</button>
       <table class="table table-bordered table-striped table-hover" >
@@ -26,4 +38,4 @@
                 </tr> -->
           </tbody>
       </table>
-</div>
+
