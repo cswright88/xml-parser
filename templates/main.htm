@@ -1,5 +1,7 @@
 <h1>overview</h1>
 <p>total job count = {{jobArr.length}}</p>
+<p class="text-danger">average bid (cpc): {{ calculateAverage(jobArr, "cpc") | number : fractionSize }} </p>
+<p class="text-danger">average bid (price): {{ calculateAverage(jobArr, "price") | number : fractionSize }} </p>
 <div class="container">
 
       

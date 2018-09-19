@@ -19,7 +19,7 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
 
     $scope.create = function() {
         if($scope.jobArr.length != 0){
-            console.log($scope.jobArr);
+            // console.log($scope.jobArr);
             for(var x=0;x<$scope.jobArr.length;x++){
                 $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
                 $scope.cityArr[$scope.jobArr[x]['city']] = 1 + ($scope.cityArr[$scope.jobArr[x]['city']] || 0 );
@@ -69,6 +69,18 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.moveForward = function(){
         $scope.begin += $scope.limit;
     }
+
+    //calc average 
+    $scope.calculateAverage = function(MyData,tag){ 
+        var sum = 0; 
+        for(var i = 0; i < MyData.length; i++){
+            sum += Number(MyData[i][tag]); //don't forget to add the base 
+        }
+    
+        var avg = sum/MyData.length;
+    
+        return avg; 
+    };
 }]);
 
 
