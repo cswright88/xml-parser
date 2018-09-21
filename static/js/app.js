@@ -1,12 +1,13 @@
 var ninjaapp = angular.module('app', ["ngRoute"]);
 ninjaapp.controller('ctrl', ['$scope', function($scope) {
-    $scope.origURL = ""
-    $scope.url = $scope.origURL;
+    $scope.url = "";
     $scope.cityMsg="this is the city stuff";
-    $scope.values = "title,city,price,cpc";
+    $scope.values = "";
     $scope.clickcast = false;
     $scope.limit = 100;
-    $scope.begin = 0
+    $scope.begin = 0;
+    $scope.example = [];
+
     $scope.jobArr = [];
     $scope.cityArr = {};
     $scope.titleArr = {};
@@ -96,6 +97,9 @@ ninjaapp.config(function($routeProvider) {
     })
     .when("/price", {
         templateUrl : "templates/price.htm"
+    })
+    .when("/example", {
+        templateUrl : "templates/example.htm"
     })
     .when("/city", {
         templateUrl : "templates/city.htm"

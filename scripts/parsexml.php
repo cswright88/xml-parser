@@ -18,10 +18,17 @@ EXAMPLE:
 
 php -a;
 $url = "test.xml";
-include "./parsexml.php"; print_r((new Parsexml($url))->parse());
+include "./parsexml.php"; print_r((new Parsexml($url))->parse()[0]);
+exit
+
+php -a;
+$url = "test.xml";
+include "./parsexml.php"; print_r((new Parsexml($url, ["referencenumber","city"]))->parse());
 exit
 
 */
+
+
 
 include('download.php');
 
@@ -29,7 +36,7 @@ include('download.php');
 class Parsexml extends dlXML{
     private $node_arr;
 
-    public function __construct($url, $node_arr = array("referencenumber", "title")){
+    public function __construct($url, $node_arr = array()){
         parent::__construct($url);
         $this->node_arr = $node_arr;
         // $this->limit = $limit;
@@ -47,19 +54,21 @@ class Parsexml extends dlXML{
                 foreach($job as $el){
                     $job_arr = array();
                     foreach($el->children() as $key=>$child){
+                        if (empty($this->node_arr)) {
+                            $node = (string)$child;
+                            $job_arr = array_merge($job_arr,array($key=>$node));
+                        }else{
                             if(in_array($key,$this->node_arr)){
                                 $node = (string)$child;
                                 $job_arr = array_merge($job_arr,array($key=>$node));
-                            }                    
-                        }
+                            }   
+                        }                 
+                    }
                     array_push($obj,$job_arr);
                 }
         return $obj;
     }
 }
-
-
-
 
 
 

@@ -1,8 +1,10 @@
-<h1>City</h1>
-<p>{{msg}}</p>
 
 
-  <div class="container">
+<h1>EXAMPLE OF THE FIRST FEW LINES OF THE XML</h1>
+<!-- <p>{{example}}</p> -->
+<!-- <p>{{example.length}}</p> -->
+
+  <!-- <div class="container">
         <table class="table table-bordered table-striped table-hover" >
             <tbody >
                 <tr>
@@ -23,5 +25,11 @@
             </tr>
             </tbody>
         </table>
-  </div>
+  </div> -->
 
+
+<ul >
+    <li ng-repeat="x in example track by $index">
+        {{x}}
+    </li>
+</ul>

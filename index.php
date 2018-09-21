@@ -94,6 +94,9 @@
       <li>
         <a href="#!price">PRICE</a>
       </li>
+      <li>
+        <a href="#!example">EXAMPLE</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -177,11 +180,16 @@
          // echo $values;
          include("scripts/parsexml.php"); 
          $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
+         $firstlines = array_slice(file($url), 0, 50);
+          $y = json_encode($firstlines);
+          // $y = json_encode(implode('', $firstlines));
          //   echo $x;
       ?>
       <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>"></span>
+      <span ng-init="example = <?php echo htmlspecialchars($y); ?>"></span>
       <div class="container">
          <div ng-view></div>
          <script ng-init="create()" async="true"></script>
       </div>
+
    </body>
