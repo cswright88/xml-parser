@@ -12,6 +12,9 @@ class dlXML {
     }
 
     public function download(){
+        if (preg_match("/(.gz)$/",$this->url)){
+            $this->url = "compress.zlib://" . $this->url;
+        }
         $xml = simplexml_load_file($this->url) or die("feed not loading");
         return $xml;
     }

@@ -180,7 +180,12 @@
          // echo $values;
          include("scripts/parsexml.php"); 
          $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
-         $firstlines = array_slice(file($url), 0, 50);
+         
+         if (preg_match("/(.gz)$/",$url)){
+          $url = "compress.zlib://" . $url;
+          }
+          $firstlines = array_slice(file($url), 0, 50);
+          // $firstlines = file_get_contents($url, NULL, NULL, 0, 50);
           $y = json_encode($firstlines);
           // $y = json_encode(implode('', $firstlines));
          //   echo $x;
