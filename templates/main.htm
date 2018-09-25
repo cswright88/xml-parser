@@ -9,7 +9,7 @@
             </div>
             <div class="card mb-4 box-shadow col-sm-4">
                 <div class="card-header bg-secondary text-white">average bid (cpc)</div>
-                    <div class="card-body">{{ calculateAverage(jobArr, "cpc") | number : fractionSize }}</div>
+                    <div class="card-body">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</div>
             </div>
             <div class="card mb-4 box-shadow col-sm-4">
                 <div class="card-header bg-secondary text-white">average bid (price)</div><div class="card-body">{{ calculateAverage(jobArr, "price") | number : fractionSize }}</div>

@@ -5,4 +5,33 @@ ul {
 .red {
   color: rgb(201, 45, 45);
 }
-  
+/* input[type=text] { 
+width: 500px;
+}
+*/
+.bg-secondary {background-color:grey;}
+.text-white {color:white}
+#rowlg {
+height:200px;
+}
+html {
+font-size: 14px;
+}
+@media (min-width: 768px) {
+html {
+font-size: 16px;
+}
+}
+.container {
+max-width: 960px;
+}
+.pricing-header {
+max-width: 700px;
+}
+.card-deck .card {
+min-width: 220px;
+}
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.padd {padding:10px;}

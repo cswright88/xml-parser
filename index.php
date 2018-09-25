@@ -22,36 +22,7 @@
       <script src="static/js/app.js"></script>
       <link rel="stylesheet" type="text/css" href="static/css/style.css" />
       <style>
-         /* input[type=text] { 
-         width: 500px;
-         }
-         */
-        .bg-secondary {background-color:grey;}
-        .text-white {color:white}
-         #rowlg {
-         heights:200px;
-         }
-         html {
-         font-size: 14px;
-         }
-         @media (min-width: 768px) {
-         html {
-         font-size: 16px;
-         }
-         }
-         .container {
-         max-width: 960px;
-         }
-         .pricing-header {
-         max-width: 700px;
-         }
-         .card-deck .card {
-         min-width: 220px;
-         }
-         .border-top { border-top: 1px solid #e5e5e5; }
-         .border-bottom { border-bottom: 1px solid #e5e5e5; }
-         .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-         .padd {padding:10px;}
+
       </style>
    </head>
    <body ng-app='app' ng-controller='ctrl'>
@@ -125,6 +96,7 @@
                 </div>
                 <div class="form-group">
                   <input class="form-control" type="text" placeholder="VALUES" ng-model=values name="values"/>
+                  <input class="form-control" type="text" placeholder="BID (optional)" ng-model=bidthing name="bid"/>
                 </div>
                 <div class="form-group">
                   <label class="form-check-label" for='exampleCheck1'>Clickcast Feed:</label>
@@ -189,12 +161,32 @@
           $y = json_encode($firstlines);
           // $y = json_encode(implode('', $firstlines));
          //   echo $x;
+
+        //  add price to the model for angular
+        // $bid = json_encode($_POST("bid"));
+        if (empty($_POST["bid"])) {
+          $bid = "";
+        } else{
+          $bidstring = test_input($_POST["bid"]);
+          // check if bid address syntax is valid (this regular expression also allows dashes in the bid)
+          if (!preg_match("/[a-z]/i",$bidstring)) {
+            echo "Invalid bid"; 
+            // $bid = $_POST['bid'];
+          }else {
+            $z = json_encode((string)$bidstring);
+            // echo json_encode($z);
+          }
+        } 
       ?>
+      <!-- <p>{{bidthing}}</p> -->
       <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>"></span>
       <span ng-init="example = <?php echo htmlspecialchars($y); ?>"></span>
+      <span ng-init="bidthing = <?php echo htmlspecialchars($z); ?>"></span>
       <div class="container">
          <div ng-view></div>
-         <script ng-init="create()" async="true"></script>
+         
+         <script ng-init="create()"></script>
+         
       </div>
 
    </body>
