@@ -13,10 +13,12 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.cityArr = {};
     $scope.titleArr = {};
     $scope.priceArr = {};
+    $scope.companyArr = {};
 
     $scope.titlenew=[];
     $scope.citynew=[];
     $scope.pricenew=[];
+    $scope.companynew=[];
   
 
 
@@ -27,6 +29,7 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
             for(var x=0;x<$scope.jobArr.length;x++){
                 $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
                 $scope.cityArr[$scope.jobArr[x]['city']] = 1 + ($scope.cityArr[$scope.jobArr[x]['city']] || 0 );
+                $scope.companyArr[$scope.jobArr[x]['company']] = 1 + ($scope.companyArr[$scope.jobArr[x]['company']] || 0 );
                 // $scope.priceArr[$scope.jobArr[x]['price']] = 1 + ($scope.priceArr[$scope.jobArr[x]['price']] || 0 );
                 // $scope.priceArr[$scope.jobArr[x]['cpc']] = 1 + ($scope.priceArr[$scope.jobArr[x]['cpc']] || 0 );
                 $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
@@ -54,6 +57,14 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
                 $scope.pricenew.push({
                     name:keyArr[i],
                     count:$scope.priceArr[keyArr[i]]
+                });
+            }
+            // console.log(Object.keys($scope.companyArr));
+            keyArr = Object.keys($scope.companyArr);
+            for(var i=0;i<keyArr.length;i++){
+                $scope.companynew.push({
+                    name:keyArr[i],
+                    count:$scope.companyArr[keyArr[i]]
                 });
             }
 
@@ -105,6 +116,9 @@ ninjaapp.config(function($routeProvider) {
     })
     .when("/example", {
         templateUrl : "templates/example.htm"
+    })
+    .when("/company", {
+        templateUrl : "templates/company.htm"
     })
     .when("/city", {
         templateUrl : "templates/city.htm"

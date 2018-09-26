@@ -1,0 +1,24 @@
+<h1>Company</h1>
+
+<div class="container">
+    <table class="table table-bordered table-striped table-hover" >
+        <tbody >
+            <tr>
+                <th>
+                    Company
+                </th>
+                <th>
+                    Count
+                </th>
+            </tr>
+            <tr ng-repeat="x in companynew | orderBy: '-count'">
+                  <td >
+                      {{x.name}}
+                  </td>
+              <td >
+                  {{x.count}}
+              </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

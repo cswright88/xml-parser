@@ -3,18 +3,50 @@
 <p class="red">Please check out the "example" button above to see a snapshot of your feed so that you can adjust the values you're calling for</p>
 <div class="container">
     
-    <div class="card-deck mb-3 text-center">
+    <!-- <div class="card-deck text-center card bg-primary mb-3">
             <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white">total job count</div><div class="card-body">{{jobArr.length}}</div>
+                <div class="card-header bg-secondary text-white"><h5 class="card-title">JOB COUNT</h6></div><div class="card-body"><p class="card-text">{{jobArr.length}}</p></div>
             </div>
             <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white">average bid (cpc)</div>
-                    <div class="card-body">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</div>
+                <div class="card-header bg-secondary text-white"><h5 class="card-title">AVERAGE BID ({{bidthing}})</h6></div>
+                    <div class="card-body"><p class="card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p></div>
             </div>
             <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white">average bid (price)</div><div class="card-body">{{ calculateAverage(jobArr, "price") | number : fractionSize }}</div>
+                <div class="card-header bg-secondary text-white"><h5 class="card-title">Company (Most Common)</h6></div><div class="card-body"><p class="card-text">{{companynew[0].name}}</p></div>
             </div>
-    </div> 
+    </div>  -->
+
+    <!-- <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div> -->
+
+    <div class="card-deck text-center">
+          
+            <div class="card box-shadow col-sm-4">
+              <div class="card-body text-white rounded bg-primary">
+                <h5 class="padd card-title">JOB COUNT</h5>
+                <p class="padd card-text">{{jobArr.length}}</p>
+              </div>
+            </div>
+            <div class="card box-shadow col-sm-4">
+              <div class="card-body text-white bg-primary">
+                <h5 class="padd card-title">AVERAGE BID ({{bidthing}})</h5>
+                <p class="padd card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p>
+              </div>
+            </div>
+            <div class="card box-shadow col-sm-4">
+              <div class="card-body text-white bg-primary">
+                <h5 class="padd card-title">COMPANY (Most Common)</h5>
+                <p class="padd card-text">{{companynew[0].name}}</p>
+              </div>
+            </div>
+          
+    </div>
+
 </div>
 <br />
 <hr />

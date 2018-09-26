@@ -66,6 +66,9 @@
         <a href="#!price">PRICE</a>
       </li>
       <li>
+        <a href="#!company">COMPANY</a>
+      </li>
+      <li>
         <a href="#!example">EXAMPLE</a>
       </li>
     </ul>
@@ -125,6 +128,7 @@
              echo "Invalid URL"; 
            }else {
              $url = $_POST['url'];
+             $u = json_encode((string)$url);
            }
          } 
          
@@ -133,12 +137,15 @@
          if (empty($_POST["values"])) {
            $values = "";
          } else{
-           $valcheck = $_POST["values"];
+           $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
            // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
            if (preg_match("/^[a-zA-Z0-9,]+$/i",$valcheck)) {
-             $values = explode(",",$_POST['values']);
+             $v = json_encode((string)$_POST['values']);
+            //  $string = str_replace(' ', '', $_POST['values']);
+            //  $string = preg_replace('/\s+/', '', $_POST['values']);
+             $values = explode(",",$valcheck);
            }else {
-             echo "Invalid values - make sure there are no whitespaces.  Letters, numbers, and commas are allowed"; 
+             echo "Invalid Values - Only Letters, numbers, whitespaces, and commas are allowed"; 
            }
          } 
          // $clickcast = $_POST['clickcast'];
@@ -168,6 +175,7 @@
           $bid = "";
         } else{
           $bidstring = test_input($_POST["bid"]);
+          $bidstring = preg_replace('/\s+/', '', $bidstring);
           // check if bid address syntax is valid (this regular expression also allows dashes in the bid)
           if (!preg_match("/[a-z]/i",$bidstring)) {
             echo "Invalid bid"; 
@@ -179,9 +187,9 @@
         } 
       ?>
       <!-- <p>{{bidthing}}</p> -->
-      <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>"></span>
-      <span ng-init="example = <?php echo htmlspecialchars($y); ?>"></span>
-      <span ng-init="bidthing = <?php echo htmlspecialchars($z); ?>"></span>
+      <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>; example = <?php echo htmlspecialchars($y); ?>; bidthing = <?php echo htmlspecialchars($z); ?>; url = <?php echo htmlspecialchars($u); ?>; values = <?php echo htmlspecialchars($v); ?>"></span>
+
+
       <div class="container">
          <div ng-view></div>
          
