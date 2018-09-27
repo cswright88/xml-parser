@@ -111,7 +111,7 @@
         </div>
       </div>
       <?php
-        //  error_reporting(0);
+         error_reporting(0);
          // $url = $_POST['url'];
          function test_input($data) {
            $data = trim($data);
