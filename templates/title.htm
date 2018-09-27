@@ -1,36 +1,24 @@
-<h1>Title</h1>
-
-<!-- <div class="row">
-    <div class="col-xs-12">
-        <ul ng-repeat="x in titlenew | orderBy: '-count'">
-            <li>{{x.name}} - {{x.count}}</li>
-        </ul>
-    </div>
-</div> -->
-
-<div class="container">
-        <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
-        <button ng-click="moveForward()">forward</button>
-        <table class="table table-bordered table-striped table-hover" >
-            <tbody >
-                <tr>
-                    <th>
-                        Title
-                    </th>
-                    <th>
-                        Count
-                    </th>
-                </tr>
-                <tr ng-repeat="x in titlenew | orderBy: '-count' | limitTo:limit:begin">
-                      <td >
-                          {{x.name}}
-                      </td>
-                  <td >
-                      {{x.count}}
-                  </td>
-            </tr>
-            </tbody>
-        </table>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1>Title</h1>
+  <div class="container">
+    <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
+    <table class="table table-bordered table-striped table-hover">
+      <tbody>
+        <tr>
+          <th>Title</th>
+          <th>Count</th>
+        </tr>
+        <tr ng-repeat="x in titlenew | orderBy: '-count' | limitTo:limit:begin">
+          <td>{{x.name}}</td>
+          <td>{{x.count}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-  
+</body>
+</html>

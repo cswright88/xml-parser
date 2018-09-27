@@ -1,25 +1,24 @@
-<h1>Price</h1>
-<div class="container">
-        <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
-        <button ng-click="moveForward()">forward</button>
-        <table class="table table-bordered table-striped table-hover" >
-            <tbody >
-                <tr>
-                    <th>
-                        Price
-                    </th>
-                    <th>
-                        Count
-                    </th>
-                </tr>
-                <tr ng-repeat="x in pricenew | orderBy: '-count' | limitTo:limit:begin">
-                      <td >
-                          {{x.name}}
-                      </td>
-                  <td >
-                      {{x.count}}
-                  </td>
-            </tr>
-            </tbody>
-        </table>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1>Price</h1>
+  <div class="container">
+    <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
+    <table class="table table-bordered table-striped table-hover">
+      <tbody>
+        <tr>
+          <th>Price</th>
+          <th>Count</th>
+        </tr>
+        <tr ng-repeat="x in pricenew | orderBy: '-count' | limitTo:limit:begin">
+          <td>{{x.name}}</td>
+          <td>{{x.count}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</body>
+</html>

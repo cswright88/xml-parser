@@ -5,46 +5,24 @@
       <meta charset="UTF-8">
       <link rel="icon" href="static/img/five.png">
       <!-- Latest compiled and minified CSS -->
-      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
       <link rel="stylesheet" href="static/css/bootstrap.min.css">
       <!-- jQuery library -->
-      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
       <script src="static/js/jquery321min.js"></script>
       <!-- Latest compiled JavaScript -->
-      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-      <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script> -->
       <script src="static/js/413bootstrapbundelmin.js"></script>
       <!-- AngularJS framework -->
-      <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
       <script src="static/js/164angularmin.js"></script>
-      <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script> -->
       <script src="static/js/169angularroutemin.js"></script>
       <script src="static/js/app.js"></script>
+      <!-- Personal CSS -->
       <link rel="stylesheet" type="text/css" href="static/css/style.css" />
       <style>
 
       </style>
    </head>
    <body ng-app='app' ng-controller='ctrl'>
-      <!-- Begin app -->
-      <!-- <div class="container">
-         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid collapse navbar-collapse">
-               <div class="navbar-header">
-                  <a class="navbar-brand" href="#">XML Tool</a>
-               </div>
-               <ul class="nav navbar-nav">
-                  <li class="active"><a href="#/!">HOME</a></li>
-                  <li><a href="#!title">TITLE</a></li>
-                  <li><a href="#!city">CITY</a></li>
-                  <li><a href="#!price">PRICE</a></li>
-               </ul>
-            </div>
-         </nav>
-      </div> -->
 <div class="container-fluid">
 <nav class="navbar navbar-expand-lg navbar-inverse">
-
     <div class="navbar-toggler navbar-toggler-right hidden-lg hidden-md hidden-sm">
       <span class="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <img src="static/img/hamburger.png" alt="expand">
@@ -86,7 +64,6 @@
          <div class="jumbotron">
             <h1> XML Tool
             </h1>
-            <?php //echo "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml</br> ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/994_JC_PPA.xml</br> https://exchangefeeds.s3.amazonaws.com/3f8752623cd8d9075ec95b01a021ab0d/feed.xml";?>
          </div>
       </header>
 
@@ -111,82 +88,62 @@
         </div>
       </div>
       <?php
-         error_reporting(0);
-         // $url = $_POST['url'];
-         function test_input($data) {
-           $data = trim($data);
-           $data = stripslashes($data);
-           $data = htmlspecialchars($data);
-           return $data;
-         }
-         if (empty($_POST["url"])) {
-           $url = "";
-         } else{
-           $website = test_input($_POST["url"]);
-           // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-           if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-             echo "Invalid URL"; 
-           }else {
-             $url = $_POST['url'];
-             $u = json_encode((string)$url);
-           }
-         } 
-         
-         // $values =  explode(",",$_POST['values']);
-         // /([a-zA-Z,]*){0,}/  -- regex to only allow commas an letters
-         if (empty($_POST["values"])) {
-           $values = "";
-         } else{
-           $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
-           // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-           if (preg_match("/^[a-zA-Z0-9,]+$/i",$valcheck)) {
-             $v = json_encode((string)$_POST['values']);
-            //  $string = str_replace(' ', '', $_POST['values']);
-            //  $string = preg_replace('/\s+/', '', $_POST['values']);
-             $values = explode(",",$valcheck);
-           }else {
-             echo "Invalid Values - Only Letters, numbers, whitespaces, and commas are allowed"; 
-           }
-         } 
-         // $clickcast = $_POST['clickcast'];
-         // $clickcast = false;
-         if(!isset($_POST['clickcast']))
-         {
-           $clickcast = false;
-         } else {
-           $clickcast = true;
-         }
-         // echo $values;
-         include("scripts/parsexml.php"); 
-         $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
-         
-         if (preg_match("/(.gz)$/",$url)){
-          $url = "compress.zlib://" . $url;
+        // Turn Error Reporting Off for Production
+        error_reporting(0);
+        function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+        }
+        if (empty($_POST["url"])) {
+          $url = "";
+        } else{
+          $website = test_input($_POST["url"]);
+          // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+          if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+            echo "Invalid URL"; 
+          }else {
+            $url = $_POST['url'];
+            $u = json_encode((string)$url);
           }
-          //need to find a way to curl this with limits to prevent downloading to much
- /*          EXAMPLE THAT WILL WORK INSTEAD OF THE BELOW FILE(FUNCTION)
- $file_path = 'http://www.ziprecruiter.com/feed/jobstocareers-sponsored.xml';
-set_time_limit(0);
-$file = @fopen($file_path,"rb");
-while(!feof($file))
-{
-	print(@fread($file, 1024*16));
-	// ob_flush();
-    // flush();
-    break;
-}  */
-          // $fileurl = file($url);
-          $file = fopen($url,"rb");
-          $firstlines = fread($file, 4096);
-          fclose($file);
-          // $firstlines = array_slice($fileurl, 0, 50);
-          
-          $y = json_encode((string)$firstlines);
-          // $y = json_encode(implode('', $firstlines));
-          //  echo $y;
+        } 
+
+        if (empty($_POST["values"])) {
+          $values = "";
+        } else{
+          $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
+          // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+          if (preg_match("/^[a-zA-Z0-9,]+$/i",$valcheck)) {
+            $v = json_encode((string)$_POST['values']);
+            $values = explode(",",$valcheck);
+          }else {
+            echo "Invalid Values - Only Letters, numbers, whitespaces, and commas are allowed"; 
+          }
+        } 
+        if(!isset($_POST['clickcast']))
+        {
+          $clickcast = false;
+        } else {
+          $clickcast = true;
+        }
+        // echo $values;
+
+        include("scripts/parsexml.php"); 
+        $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
+        //  do I still need this since its in download.php?
+        if (preg_match("/(.gz)$/",$url)){
+          $url = "compress.zlib://" . $url;
+        }
+
+        // read first part of the xml file for example.htm
+        $file = fopen($url,"rb");
+        $firstlines = fread($file, 4096);
+        fclose($file);
+        $y = json_encode((string)$firstlines);
+        //  echo $y;
 
         //  add price to the model for angular
-        // $bid = json_encode($_POST("bid"));
         if (empty($_POST["bid"])) {
           $bid = "";
         } else{
@@ -195,22 +152,15 @@ while(!feof($file))
           // check if bid address syntax is valid (this regular expression also allows dashes in the bid)
           if (!preg_match("/[a-z]/i",$bidstring)) {
             echo "Invalid bid"; 
-            // $bid = $_POST['bid'];
+          // $bid = $_POST['bid'];
           }else {
             $z = json_encode((string)$bidstring);
-            // echo json_encode($z);
           }
         } 
       ?>
-      <!-- <p>{{bidthing}}</p> -->
       <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>; example = <?php echo htmlspecialchars($y); ?>; bidthing = <?php echo htmlspecialchars($z); ?>; url = <?php echo htmlspecialchars($u); ?>; values = <?php echo htmlspecialchars($v); ?>"></span>
-
-
       <div class="container">
          <div ng-view></div>
-         
          <script ng-init="create()"></script>
-         
       </div>
-
    </body>

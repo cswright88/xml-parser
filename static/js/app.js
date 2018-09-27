@@ -7,6 +7,7 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.clickcast = false;
     $scope.limit = 100;
     $scope.begin = 0;
+    
     $scope.example = [];
 
     $scope.jobArr = [];
@@ -30,8 +31,6 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
                 $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
                 $scope.cityArr[$scope.jobArr[x]['city']] = 1 + ($scope.cityArr[$scope.jobArr[x]['city']] || 0 );
                 $scope.companyArr[$scope.jobArr[x]['company']] = 1 + ($scope.companyArr[$scope.jobArr[x]['company']] || 0 );
-                // $scope.priceArr[$scope.jobArr[x]['price']] = 1 + ($scope.priceArr[$scope.jobArr[x]['price']] || 0 );
-                // $scope.priceArr[$scope.jobArr[x]['cpc']] = 1 + ($scope.priceArr[$scope.jobArr[x]['cpc']] || 0 );
                 $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
                 
             }

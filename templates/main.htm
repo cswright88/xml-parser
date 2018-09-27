@@ -1,74 +1,46 @@
-<h1>Overview</h1>
-<p class="red">Don't see all the data you're looking for?</p>
-<p class="red">Please check out the "example" button above to see a snapshot of your feed so that you can adjust the values you're calling for</p>
-<div class="container">
-    
-    <!-- <div class="card-deck text-center card bg-primary mb-3">
-            <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white"><h5 class="card-title">JOB COUNT</h6></div><div class="card-body"><p class="card-text">{{jobArr.length}}</p></div>
-            </div>
-            <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white"><h5 class="card-title">AVERAGE BID ({{bidthing}})</h6></div>
-                    <div class="card-body"><p class="card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p></div>
-            </div>
-            <div class="card mb-4 box-shadow col-sm-4">
-                <div class="card-header bg-secondary text-white"><h5 class="card-title">Company (Most Common)</h6></div><div class="card-body"><p class="card-text">{{companynew[0].name}}</p></div>
-            </div>
-    </div>  -->
-
-    <!-- <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div> -->
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1>Overview</h1>
+  <p class="red">Don't see all the data you're looking for?</p>
+  <p class="red">Please check out the "example" button above to see a snapshot of your feed so that you can adjust the values you're calling for</p>
+  <div class="container">
     <div class="card-deck text-center">
-          
-            <div class="card box-shadow col-sm-4">
-              <div class="card-body text-white rounded bg-primary">
-                <h5 class="padd card-title">JOB COUNT</h5>
-                <p class="padd card-text">{{jobArr.length}}</p>
-              </div>
-            </div>
-            <div class="card box-shadow col-sm-4">
-              <div class="card-body text-white bg-primary">
-                <h5 class="padd card-title">AVERAGE BID ({{bidthing}})</h5>
-                <p class="padd card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p>
-              </div>
-            </div>
-            <div class="card box-shadow col-sm-4">
-              <div class="card-body text-white bg-primary">
-                <h5 class="padd card-title">COMPANY (Most Common)</h5>
-                <p class="padd card-text">{{companynew[0].name}}</p>
-              </div>
-            </div>
-          
+      <div class="card box-shadow col-sm-4">
+        <div class="card-body text-white rounded bg-primary">
+          <h5 class="padd card-title">JOB COUNT</h5>
+          <p class="padd card-text">{{jobArr.length}}</p>
+        </div>
+      </div>
+      <div class="card box-shadow col-sm-4">
+        <div class="card-body text-white bg-primary">
+          <h5 class="padd card-title">AVERAGE BID ({{bidthing}})</h5>
+          <p class="padd card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p>
+        </div>
+      </div>
+      <div class="card box-shadow col-sm-4">
+        <div class="card-body text-white bg-primary">
+          <h5 class="padd card-title">COMPANY (Most Common)</h5>
+          <p class="padd card-text">{{companynew[0].name}}</p>
+        </div>
+      </div>
     </div>
-
-</div>
-<br />
-<hr />
-<br />
-<button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
-<button ng-click="moveForward()">forward</button>
-      <table class="table table-bordered table-striped table-hover" >
-          <tbody >
-              <tr ng-repeat="(k,x) in jobArr | limitTo:1">
-                    <th ng-repeat="(key,val) in x | limitTo:1">
-                        {{key}}
-                    </th>
-                </tr>
-                <tr ng-repeat="(k,x) in jobArr | limitTo:limit:begin">
-                <td ng-repeat="(key,val) in x ">
-                    {{val}}
-                </td>
-              </tr>
-              <!-- <tr ng-repeat="item in vm.items">
-                    <td>{{$index}}</td>
-                    <td>{{item}}</td>
-                </tr> -->
-          </tbody>
-      </table>
-
+  </div><br>
+  <hr>
+  <br>
+  <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
+  <table class="table table-bordered table-striped table-hover">
+    <tbody>
+      <tr ng-repeat="(k,x) in jobArr | limitTo:1">
+        <th ng-repeat="(key,val) in x | limitTo:1">{{key}}</th>
+      </tr>
+      <tr ng-repeat="(k,x) in jobArr | limitTo:limit:begin">
+        <td ng-repeat="(key,val) in x">{{val}}</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
