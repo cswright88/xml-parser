@@ -3,6 +3,8 @@
 
 
   <div class="container">
+        <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}}
+        <button ng-click="moveForward()">forward</button>
         <table class="table table-bordered table-striped table-hover" >
             <tbody >
                 <tr>
@@ -13,7 +15,7 @@
                         Count
                     </th>
                 </tr>
-                <tr ng-repeat="x in citynew | orderBy: '-count'">
+                <tr ng-repeat="x in citynew | orderBy: '-count' | limitTo:limit:begin">
                       <td >
                           {{x.name}}
                       </td>

@@ -111,7 +111,7 @@
         </div>
       </div>
       <?php
-         error_reporting(0);
+        //  error_reporting(0);
          // $url = $_POST['url'];
          function test_input($data) {
            $data = trim($data);
@@ -163,11 +163,27 @@
          if (preg_match("/(.gz)$/",$url)){
           $url = "compress.zlib://" . $url;
           }
-          $firstlines = array_slice(file($url), 0, 50);
-          // $firstlines = file_get_contents($url, NULL, NULL, 0, 50);
-          $y = json_encode($firstlines);
+          //need to find a way to curl this with limits to prevent downloading to much
+ /*          EXAMPLE THAT WILL WORK INSTEAD OF THE BELOW FILE(FUNCTION)
+ $file_path = 'http://www.ziprecruiter.com/feed/jobstocareers-sponsored.xml';
+set_time_limit(0);
+$file = @fopen($file_path,"rb");
+while(!feof($file))
+{
+	print(@fread($file, 1024*16));
+	// ob_flush();
+    // flush();
+    break;
+}  */
+          // $fileurl = file($url);
+          $file = fopen($url,"rb");
+          $firstlines = fread($file, 4096);
+          fclose($file);
+          // $firstlines = array_slice($fileurl, 0, 50);
+          
+          $y = json_encode((string)$firstlines);
           // $y = json_encode(implode('', $firstlines));
-         //   echo $x;
+          //  echo $y;
 
         //  add price to the model for angular
         // $bid = json_encode($_POST("bid"));

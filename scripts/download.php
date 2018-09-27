@@ -30,7 +30,7 @@ class dlXML {
         if (preg_match("/(.gz)$/",$this->url)){
             $this->url = "compress.zlib://" . $this->url;
         }
-        if($this->retrieve_remote_file_size($this->url) < 100000000){
+        if($this->retrieve_remote_file_size($this->url) < 75000000){
             $xml = simplexml_load_file($this->url) or die("feed not loading");
             return $xml;
         }else {
