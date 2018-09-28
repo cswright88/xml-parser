@@ -36,7 +36,7 @@
                   </span>
                </div>
                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                  <ul class="nav navbar-nav">
+                  <ul ng-click="backToStart()" class="nav navbar-nav">
                      <li class="active">
                         <a href="#/!">OVERVIEW <span class="sr-only">(current)</span></a>
                      </li>
@@ -47,7 +47,7 @@
                         <a href="#!city">CITY</a>
                      </li>
                      <li>
-                        <a href="#!price">PRICE</a>
+                        <a href="#!price">BID</a>
                      </li>
                      <li>
                         <a href="#!company">COMPANY</a>
@@ -83,7 +83,7 @@
                   <div class="form-group">
                      <label class="form-label">VALUES (required) - ex: title,city,state,cpc:</label>
                      <input class="form-control" type="text" placeholder="VALUES (required) - ex: title,city,state,cpc" ng-model=values name="values"/>
-                     <label class="form-label">BID (required)  - ex: cpc:</label>
+                     <label class="form-label" data-toggle="tooltip" data-placement="right" title="This tag doesn't have to be in the feed for this to work.  This is used to determine average bid.  Make sure your bid tag is also one of your values listed above">BID TAG (required)  - ex: cpc:</label>
                      <input class="form-control" type="text" placeholder="BID (required)  - ex: cpc" ng-model=bidthing name="bid"/>
                   </div>
                   <div class="form-group">

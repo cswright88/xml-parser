@@ -86,6 +86,10 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         $scope.begin += $scope.limit;
     }
 
+    $scope.backToStart = function(){
+        $scope.begin = 0;
+    }
+
     //calc average 
     $scope.calculateAverage = function(MyData,tag){ 
         var sum = 0; 

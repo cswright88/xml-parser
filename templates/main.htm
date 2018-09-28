@@ -31,7 +31,7 @@
   </div><br>
   <hr>
   <br>
-  <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
+  <button ng-click="backToStart()">Back To Start</button><button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
   <table class="table table-bordered table-striped table-hover">
     <tbody>
       <tr ng-repeat="(k,x) in jobArr | limitTo:1">
