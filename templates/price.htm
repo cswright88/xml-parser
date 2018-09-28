@@ -5,6 +5,16 @@
 </head>
 <body>
   <h1>Price</h1>
+
+  <div class="container">
+      <div class="card box-shadow col-sm-4">
+          <div class="card-body text-white bg-primary">
+            <h5 class="padd card-title">AVERAGE BID ({{bidthing}})</h5>
+            <p class="padd card-text">{{ calculateAverage(jobArr, bidthing) | number : fractionSize }}</p>
+          </div>
+      </div>
+  </div>
+
   <div class="container">
     <button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
     <table class="table table-bordered table-striped table-hover">

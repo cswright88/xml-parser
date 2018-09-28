@@ -3,7 +3,7 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.url = "";
     $scope.bidthing = "cpc";
     $scope.cityMsg="this is the city stuff";
-    $scope.values = "title,city,state,cpc,company";
+    $scope.values = "title,city,state,company,cpc";
     $scope.clickcast = false;
     $scope.limit = 100;
     $scope.begin = 0;
