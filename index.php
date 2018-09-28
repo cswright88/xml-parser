@@ -5,23 +5,26 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
       <link rel="icon" href="static/img/five.png">
-      <!-- jQuery library -->
-      <script src="static/js/jquery321min.js"></script>
-      <!-- Latest compiled and minified CSS -->
+      <!-- bootstrap requirements internal files -->
       <link rel="stylesheet" href="static/css/bootstrap.min.css">
-      <!-- Downloaded version jquery first -->
-      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
-      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-      <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
-      <!-- Latest compiled JavaScript -->
+      <script src="static/js/jquery321min.js"></script>
       <script src="static/js/413bootstrapbundelmin.js"></script>
+      <!-- EXTERNAL FILES -->
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
       <!-- AngularJS framework -->
       <script src="static/js/164angularmin.js"></script>
       <script src="static/js/169angularroutemin.js"></script>
       <script src="static/js/app.js"></script>
       <!-- Personal CSS -->
       <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+      <script>
+        // This only works with the external files added above for bootstrap -- need to configure the internal docs to fit thoes again instead of current external ones
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+      </script>
    </head>
    <!-- BODY -->
    <body ng-app='app' ng-controller='ctrl'>
@@ -83,7 +86,7 @@
                   <div class="form-group">
                      <label class="form-label">VALUES (required) - ex: title,city,state,cpc:</label>
                      <input class="form-control" type="text" placeholder="VALUES (required) - ex: title,city,state,cpc" ng-model=values name="values"/>
-                     <label class="form-label" data-toggle="tooltip" data-placement="right" title="This tag doesn't have to be in the feed for this to work.  This is used to determine average bid.  Make sure your bid tag is also one of your values listed above">BID TAG (required)  - ex: cpc:</label>
+                     <label class="form-label" data-toggle="tooltip" data-placement="right" title="Bid tag must also be a values tag to work">BID TAG (required)  - ex: cpc:</label>
                      <input class="form-control" type="text" placeholder="BID (required)  - ex: cpc" ng-model=bidthing name="bid"/>
                   </div>
                   <div class="form-group">
@@ -186,4 +189,5 @@
          <div ng-view></div>
          <script ng-init="create()"></script>
       </div>
+
    </body>
