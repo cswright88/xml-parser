@@ -73,11 +73,13 @@
           <div class="pb-5 padd col-xs-12">
             <form action="" method="POST" class="form">
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="URL" ng-model=url name="url"/>
+                  <input class="form-control" type="text" placeholder="URL (required)" ng-model=url name="url"/>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="VALUES" ng-model=values name="values"/>
-                  <input class="form-control" type="text" placeholder="BID (optional)" ng-model=bidthing name="bid"/>
+                <label class="form-label">VALUES (required) - ex: title,city,state,cpc:</label>
+                  <input class="form-control" type="text" placeholder="VALUES (required) - ex: title,city,state,cpc" ng-model=values name="values"/>
+                  <label class="form-label">BID (required)  - ex: cpc:</label>
+                  <input class="form-control" type="text" placeholder="BID (required)  - ex: cpc" ng-model=bidthing name="bid"/>
                 </div>
                 <div class="form-group">
                   <label class="form-check-label" for='exampleCheck1'>Clickcast Feed:</label>

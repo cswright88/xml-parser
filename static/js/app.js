@@ -1,9 +1,9 @@
 var ninjaapp = angular.module('app', ["ngRoute"]);
 ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.url = "";
-    $scope.bidthing = "";
+    $scope.bidthing = "cpc";
     $scope.cityMsg="this is the city stuff";
-    $scope.values = "";
+    $scope.values = "title,city,state,cpc,company";
     $scope.clickcast = false;
     $scope.limit = 100;
     $scope.begin = 0;
