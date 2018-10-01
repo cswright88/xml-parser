@@ -44,16 +44,16 @@
                         <a href="#/!">OVERVIEW <span class="sr-only">(current)</span></a>
                      </li>
                      <li>
-                        <a href="#!title">TITLE</a>
+                        <a href="#!title" ng-click="createTitle()">TITLE</a>
                      </li>
                      <li>
-                        <a href="#!city">CITY</a>
+                        <a href="#!city" ng-click="createCity()">CITY</a>
                      </li>
                      <li>
-                        <a href="#!price">BID</a>
+                        <a href="#!price" ng-click="createBid()">BID</a>
                      </li>
                      <li>
-                        <a href="#!company">COMPANY</a>
+                        <a href="#!company" ng-click="createCompany()">COMPANY</a>
                      </li>
                      <li>
                         <a href="#!example">EXAMPLE</a>
@@ -165,7 +165,8 @@
             $count ++;
          }
          fclose($handle);
-         $y = explode(">",$contents);
+         $y = preg_split('/(<.*?>.*?<\/.*?>)/',$contents,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        //  $y = explode(">",$contents);
          $y = json_encode($y);
          //  echo $y;
          
@@ -187,7 +188,6 @@
       <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>; example = <?php echo htmlspecialchars($y); ?>; bidthing = <?php echo htmlspecialchars($z); ?>; url = <?php echo htmlspecialchars($u); ?>; values = <?php echo htmlspecialchars($v); ?>"></span>
       <div class="container">
          <div ng-view></div>
-         <script ng-init="create()"></script>
       </div>
 
    </body>

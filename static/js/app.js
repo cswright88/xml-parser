@@ -22,25 +22,13 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.companynew=[];
   
 
-
-    $scope.create = function() {
-        if($scope.jobArr.length != 0){
-            // console.log($scope.jobArr);
-            // console.log($scope.bid);
+    $scope.createCity = function() {
+        if ($scope.citynew.length > 0 && $scope.jobArr.length > 0){
+            // console.log('do nothing for city, its already done');
+        }else {
+            // console.log('do something for city, this shit is empty');
             for(var x=0;x<$scope.jobArr.length;x++){
-                $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
                 $scope.cityArr[$scope.jobArr[x]['city']] = 1 + ($scope.cityArr[$scope.jobArr[x]['city']] || 0 );
-                $scope.companyArr[$scope.jobArr[x]['company']] = 1 + ($scope.companyArr[$scope.jobArr[x]['company']] || 0 );
-                $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
-                
-            }
-            // console.log(Object.keys($scope.titleArr));
-            keyArr = Object.keys($scope.titleArr);
-            for(var i=0;i<keyArr.length;i++){
-                $scope.titlenew.push({
-                    name:keyArr[i],
-                    count:$scope.titleArr[keyArr[i]]
-                });
             }
             // console.log(Object.keys($scope.cityArr));
             keyArr = Object.keys($scope.cityArr);
@@ -50,13 +38,33 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
                     count:$scope.cityArr[keyArr[i]]
                 });
             }
-            // console.log(Object.keys($scope.priceArr));
-            keyArr = Object.keys($scope.priceArr);
+        }
+    }
+    $scope.createTitle = function() {
+        if ($scope.titlenew.length > 0 && $scope.jobArr.length > 0){
+            // console.log('do nothing for title, its already done');
+        }else {
+            // console.log('do something for title, this shit is empty');
+            for(var x=0;x<$scope.jobArr.length;x++){
+                $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
+            }
+            // console.log(Object.keys($scope.titleArr));
+            keyArr = Object.keys($scope.titleArr);
             for(var i=0;i<keyArr.length;i++){
-                $scope.pricenew.push({
+                $scope.titlenew.push({
                     name:keyArr[i],
-                    count:$scope.priceArr[keyArr[i]]
+                    count:$scope.titleArr[keyArr[i]]
                 });
+            }
+        }
+    }
+    $scope.createCompany = function() {
+        if ($scope.companynew.length > 0 && $scope.jobArr.length > 0){
+            // console.log('do nothing for company, its already done');
+        }else {
+            // console.log('do something for company, this shit is empty');
+            for(var x=0;x<$scope.jobArr.length;x++){
+                $scope.companyArr[$scope.jobArr[x]['company']] = 1 + ($scope.companyArr[$scope.jobArr[x]['company']] || 0 );
             }
             // console.log(Object.keys($scope.companyArr));
             keyArr = Object.keys($scope.companyArr);
@@ -66,10 +74,24 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
                     count:$scope.companyArr[keyArr[i]]
                 });
             }
-
-
-        }else{
-            $scope.cityMsg = 'no city content';
+        }
+    }
+    $scope.createBid = function() {
+        if ($scope.pricenew.length > 0 && $scope.jobArr.length > 0){
+            // console.log('do nothing for bid, its already done');
+        }else {
+            // console.log('do something for bid, this shit is empty');
+            for(var x=0;x<$scope.jobArr.length;x++){
+                $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
+            }
+        //    console.log(Object.keys($scope.priceArr));
+           keyArr = Object.keys($scope.priceArr);
+           for(var i=0;i<keyArr.length;i++){
+               $scope.pricenew.push({
+                   name:keyArr[i],
+                   count:$scope.priceArr[keyArr[i]]
+               });
+           }
         }
     }
 
