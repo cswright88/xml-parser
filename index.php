@@ -58,6 +58,9 @@
                      <li>
                         <a href="#!example">EXAMPLE</a>
                      </li>
+                     <li>
+                        <a href="#!advancedGrep">ADVANCED</a>
+                     </li>
                   </ul>
                </div>
             </div>

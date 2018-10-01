@@ -145,6 +145,9 @@ ninjaapp.config(function($routeProvider) {
     .when("/company", {
         templateUrl : "templates/company.htm"
     })
+    .when("/advancedGrep", {
+        templateUrl : "templates/advancedGrep.htm"
+    })
     .when("/city", {
         templateUrl : "templates/city.htm"
     });
