@@ -125,7 +125,7 @@
          } else{
            $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
            // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-           if (preg_match("/^[a-zA-Z0-9,]+$/i",$valcheck)) {
+           if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) {
              $v = json_encode((string)$_POST['values']);
              $values = explode(",",$valcheck);
            }else {
