@@ -129,7 +129,7 @@
              $v = json_encode((string)$_POST['values']);
              $values = explode(",",$valcheck);
            }else {
-             echo "Invalid Values - Only Letters, numbers, whitespaces, and commas are allowed"; 
+             echo "Invalid Characters in Values - Only Letters, numbers, whitespaces, dashes, underscores and commas are allowed"; 
            }
          } 
          if(!isset($_POST['clickcast']))
