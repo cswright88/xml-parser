@@ -31,13 +31,15 @@
   </div><br>
   <hr>
   <br>
+  <label>Search: <input type="text" ng-model="searchText"></label>
+  <br>
   <button ng-click="backToStart()">Back To Start</button><button ng-click="moveBack()">back</button> Displaying {{begin}} - {{begin + limit}} <button ng-click="moveForward()">forward</button>
   <table class="table table-bordered table-striped table-hover">
     <tbody>
       <tr ng-repeat="(k,x) in jobArr | limitTo:1">
         <th ng-repeat="(key,val) in x | limitTo:1">{{key}}</th>
       </tr>
-      <tr ng-repeat="(k,x) in jobArr | limitTo:limit:begin">
+      <tr ng-repeat="(k,x) in jobArr | limitTo:limit:begin | filter:searchText">
         <td ng-repeat="(key,val) in x">{{val}}</td>
       </tr>
     </tbody>
