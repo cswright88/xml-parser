@@ -2,6 +2,7 @@
 
 class dlXML {
     private $url;
+    private $setLimit = 50000000;
 
     public function __construct($url){
         $this->url = $url;
@@ -28,9 +29,14 @@ class dlXML {
     public function download(){
         set_time_limit(60);
         if (preg_match("/(.gz)$/",$this->url)){
-            $this->url = "compress.zlib://" . $this->url;
+            $this->setLimit = 10000000;
+            if($this->retrieve_remote_file_size($this->url) < $this->setLimit){
+                $this->url = "compress.zlib://" . $this->url;
+            }else {
+                die("feed too large - please get with someone who knows grep");
+            }  
         }
-        if($this->retrieve_remote_file_size($this->url) < 75000000){
+        if($this->retrieve_remote_file_size($this->url) < $this->setLimit){
             $xml = simplexml_load_file($this->url) or die("feed not loading");
             return $xml;
         }else {
