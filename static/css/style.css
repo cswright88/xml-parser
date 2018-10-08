@@ -33,3 +33,17 @@ min-width: 220px;
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 .padd {padding:10px;}
 .marg {margin:10px;}
+#scrollArea {
+  height: 280px;
+  overflow: auto;
+}
+
+#bottom {
+  display: block;
+  margin-top: 2000px;
+}
+
+#buttongrep {
+  width:100%;
+  background-color:lightblue;
+}

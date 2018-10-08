@@ -59,7 +59,7 @@
                         <a href="#!example">EXAMPLE</a>
                      </li>
                      <li>
-                        <a href="#!advancedGrep" ng-click="setupGrep()">ADVANCED</a>
+                        <a href="#!advancedGrep" ng-click="setupGrep()">ADVANCED (beta)</a>
                      </li>
                   </ul>
                </div>

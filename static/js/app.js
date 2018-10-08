@@ -95,6 +95,62 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         }
     }
 
+    // for advanced grep tool
+    $scope.valueArr = [];
+    $scope.valuePicked = "";
+    $scope.getTag = "";
+    $scope.innerValPicked = "";
+    $scope.innerValArr = [];
+    $scope.finalGrepArr = [];
+    $scope.grepMostCommon = [];
+    $scope.setupGrep = function(){
+        if($scope.valueArr.length > 0){
+            console.log('do nothing we got the data');
+        }else {
+            $scope.valueArr = $scope.values.split(",");
+            console.log($scope.valueArr);
+            console.log($scope.valuePicked);
+        }
+    }
+    $scope.getFunc = function(newval){
+        $scope.getTag = newval;
+    }
+    $scope.newValue = function(newVal){
+        $scope.valuePicked = newVal;
+        $scope.innerValArr = [];
+        for(var x=0;x<$scope.jobArr.length;x++){
+            if($scope.innerValArr.indexOf($scope.jobArr[x][newVal]) > -1){
+                console.log('do nothing');
+            }else{
+                $scope.innerValArr.push($scope.jobArr[x][newVal]);
+            }
+        }
+        console.log($scope.innerValArr);
+    }
+    $scope.newInner = function(v){
+        $scope.innerValPicked = v;
+    }
+    $scope.grepFind = function(){
+        if ($scope.getTag != "" && $scope.innerValPicked != "" && $scope.valuePicked != ""){
+            console.log($scope.getTag);
+            console.log($scope.innerValPicked);
+            console.log($scope.valuePicked);
+            $scope.finalGrepArr = [];
+            for (var c = 0; c < $scope.jobArr.length; c++){
+                if($scope.jobArr[c][$scope.valuePicked] == $scope.innerValPicked){
+                    $scope.finalGrepArr.push($scope.jobArr[c][$scope.getTag]);
+                }
+            }
+        }else {
+            console.log($scope.getTag);
+            console.log($scope.innerValPicked);
+            console.log($scope.valuePicked);
+            console.log("something is empty");
+        }
+    }
+
+
+
     // moveBack()
     $scope.moveBack = function(){
         if($scope.begin - $scope.limit <= 0){
