@@ -11,10 +11,10 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.example = [];
 
     $scope.jobArr = [];
-    $scope.cityArr = {};
-    $scope.titleArr = {};
-    $scope.priceArr = {};
-    $scope.companyArr = {};
+    $scope.cityArr = [];
+    $scope.titleArr = [];
+    $scope.priceArr = [];
+    $scope.companyArr = [];
 
     $scope.titlenew=[];
     $scope.citynew=[];
@@ -26,72 +26,52 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         if ($scope.citynew.length > 0 && $scope.jobArr.length > 0){
             // console.log('do nothing for city, its already done');
         }else {
-            // console.log('do something for city, this shit is empty');
             for(var x=0;x<$scope.jobArr.length;x++){
-                $scope.cityArr[$scope.jobArr[x]['city']] = 1 + ($scope.cityArr[$scope.jobArr[x]['city']] || 0 );
+                $scope.cityArr.push($scope.jobArr[x]['city']);
             }
-            // console.log(Object.keys($scope.cityArr));
-            keyArr = Object.keys($scope.cityArr);
-            for(var i=0;i<keyArr.length;i++){
-                $scope.citynew.push({
-                    name:keyArr[i],
-                    count:$scope.cityArr[keyArr[i]]
-                });
-            }
+            $scope.citynew = $scope.generateCount($scope.cityArr);
         }
     }
     $scope.createTitle = function() {
         if ($scope.titlenew.length > 0 && $scope.jobArr.length > 0){
             // console.log('do nothing for title, its already done');
         }else {
-            // console.log('do something for title, this shit is empty');
             for(var x=0;x<$scope.jobArr.length;x++){
-                $scope.titleArr[$scope.jobArr[x]['title']] = 1 + ($scope.titleArr[$scope.jobArr[x]['title']] || 0 );
+                $scope.titleArr.push($scope.jobArr[x]['title']);
             }
-            // console.log(Object.keys($scope.titleArr));
-            keyArr = Object.keys($scope.titleArr);
-            for(var i=0;i<keyArr.length;i++){
-                $scope.titlenew.push({
-                    name:keyArr[i],
-                    count:$scope.titleArr[keyArr[i]]
-                });
-            }
+            $scope.titlenew = $scope.generateCount($scope.titleArr);
         }
     }
     $scope.createCompany = function() {
         if ($scope.companynew.length > 0 && $scope.jobArr.length > 0){
             // console.log('do nothing for company, its already done');
         }else {
-            // console.log('do something for company, this shit is empty');
             for(var x=0;x<$scope.jobArr.length;x++){
-                $scope.companyArr[$scope.jobArr[x]['company']] = 1 + ($scope.companyArr[$scope.jobArr[x]['company']] || 0 );
+                $scope.companyArr.push($scope.jobArr[x]['company']);
             }
-            // console.log(Object.keys($scope.companyArr));
-            keyArr = Object.keys($scope.companyArr);
-            for(var i=0;i<keyArr.length;i++){
-                $scope.companynew.push({
-                    name:keyArr[i],
-                    count:$scope.companyArr[keyArr[i]]
-                });
-            }
+            $scope.companynew = $scope.generateCount($scope.companyArr);
         }
     }
     $scope.createBid = function() {
         if ($scope.pricenew.length > 0 && $scope.jobArr.length > 0){
             // console.log('do nothing for bid, its already done');
         }else {
-            // console.log('do something for bid, this shit is empty');
-            for(var x=0;x<$scope.jobArr.length;x++){
-                $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
-            }
-        //    console.log(Object.keys($scope.priceArr));
-           keyArr = Object.keys($scope.priceArr);
-           for(var i=0;i<keyArr.length;i++){
-               $scope.pricenew.push({
-                   name:keyArr[i],
-                   count:$scope.priceArr[keyArr[i]]
-               });
-           }
+        //     // console.log('do something for bid, this shit is empty');
+        //     for(var x=0;x<$scope.jobArr.length;x++){
+        //         $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
+        //     }
+        // //    console.log(Object.keys($scope.priceArr));
+        //    keyArr = Object.keys($scope.priceArr);
+        //    for(var i=0;i<keyArr.length;i++){
+        //        $scope.pricenew.push({
+        //            name:keyArr[i],
+        //            count:$scope.priceArr[keyArr[i]]
+        //        });
+        //    }
+        for(var x=0;x<$scope.jobArr.length;x++){
+            $scope.priceArr.push($scope.jobArr[x][$scope.bidthing]);
+        }
+        $scope.pricenew = $scope.generateCount($scope.priceArr);
         }
     }
 
@@ -108,8 +88,6 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
             console.log('do nothing we got the data');
         }else {
             $scope.valueArr = $scope.values.split(",");
-            console.log($scope.valueArr);
-            console.log($scope.valuePicked);
         }
     }
     $scope.getFunc = function(newval){
@@ -120,32 +98,24 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         $scope.innerValArr = [];
         for(var x=0;x<$scope.jobArr.length;x++){
             if($scope.innerValArr.indexOf($scope.jobArr[x][newVal]) > -1){
-                console.log('do nothing');
             }else{
                 $scope.innerValArr.push($scope.jobArr[x][newVal]);
             }
         }
-        console.log($scope.innerValArr);
     }
     $scope.newInner = function(v){
         $scope.innerValPicked = v;
     }
     $scope.grepFind = function(){
         if ($scope.getTag != "" && $scope.innerValPicked != "" && $scope.valuePicked != ""){
-            console.log($scope.getTag);
-            console.log($scope.innerValPicked);
-            console.log($scope.valuePicked);
             $scope.finalGrepArr = [];
             for (var c = 0; c < $scope.jobArr.length; c++){
                 if($scope.jobArr[c][$scope.valuePicked] == $scope.innerValPicked){
                     $scope.finalGrepArr.push($scope.jobArr[c][$scope.getTag]);
                 }
             }
-        }else {
-            console.log($scope.getTag);
-            console.log($scope.innerValPicked);
-            console.log($scope.valuePicked);
-            console.log("something is empty");
+            // call function to get count
+            $scope.grepMostCommon = $scope.generateCount($scope.finalGrepArr);
         }
     }
 
@@ -179,6 +149,28 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     
         return avg; 
     };
+
+    //function to sort a bunch of obj by count that works well for angular call later on 
+    $scope.generateCount = function(originalArr) {
+        newArr = [];
+        for (var x = 0; x<originalArr.length;x++) {
+            if (newArr.length > 0) {
+                var found = false;
+                for (var i = 0; i < newArr.length; i++) {
+                    if (newArr[i].name === originalArr[x]) {
+                        newArr[i].count++;
+                        found = true;
+                    }
+                }
+                if (found === false) {
+                    newArr.push({name:originalArr[x],count:1});
+                }
+            } else {
+                newArr.push({name:originalArr[x],count:1});
+            }
+        }
+        return newArr;
+    }
 }]);
 
 
