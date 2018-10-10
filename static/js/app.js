@@ -1,8 +1,7 @@
 var ninjaapp = angular.module('app', ["ngRoute"]);
-ninjaapp.controller('ctrl', ['$scope', function($scope) {
+ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     $scope.url = "";
     $scope.bidthing = "cpc";
-    $scope.cityMsg="this is the city stuff";
     $scope.values = "title,city,state,company,cpc";
     $scope.clickcast = false;
     $scope.limit = 100;
@@ -21,6 +20,7 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
     $scope.pricenew=[];
     $scope.companynew=[];
   
+
 
     $scope.createCity = function() {
         if ($scope.citynew.length > 0 && $scope.jobArr.length > 0){
@@ -56,18 +56,6 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         if ($scope.pricenew.length > 0 && $scope.jobArr.length > 0){
             // console.log('do nothing for bid, its already done');
         }else {
-        //     // console.log('do something for bid, this shit is empty');
-        //     for(var x=0;x<$scope.jobArr.length;x++){
-        //         $scope.priceArr[$scope.jobArr[x][$scope.bidthing]] = 1 + ($scope.priceArr[$scope.jobArr[x][$scope.bidthing]] || 0 );
-        //     }
-        // //    console.log(Object.keys($scope.priceArr));
-        //    keyArr = Object.keys($scope.priceArr);
-        //    for(var i=0;i<keyArr.length;i++){
-        //        $scope.pricenew.push({
-        //            name:keyArr[i],
-        //            count:$scope.priceArr[keyArr[i]]
-        //        });
-        //    }
         for(var x=0;x<$scope.jobArr.length;x++){
             $scope.priceArr.push($scope.jobArr[x][$scope.bidthing]);
         }
@@ -171,6 +159,48 @@ ninjaapp.controller('ctrl', ['$scope', function($scope) {
         }
         return newArr;
     }
+
+
+
+
+
+/* EVERYTHING BELOW THIS IS NEW CODE FOR THE BRANCH */
+    $scope.run = function() {
+        $http({
+            method  : 'GET',
+            url     : "/php/php/scripts/newDownload.php",
+            timeout : 10000,
+            params  : {
+                url:$scope.url,
+                values:$scope.values,
+                click:$scope.clickcast
+            }
+            }).then(function(response) {
+                    $scope.jobArr = response.data;
+                    console.log($scope.jobArr);
+                    console.log(response);
+              }, function errorCallback(response) {
+                  console.log(response);
+                //   $window.alert('error');
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }]);
 
 

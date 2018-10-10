@@ -82,7 +82,7 @@
       <div class="container">
          <div class="row mb-4 box-shadow">
             <div class="pb-5 padd col-xs-12">
-               <form action="" method="POST" class="form">
+               <form class="form">
                   <div class="form-group">
                      <input class="form-control" type="text" placeholder="URL (required)" ng-model=url name="url"/>
                   </div>
@@ -96,99 +96,102 @@
                      <label class="form-check-label" for='exampleCheck1'>Clickcast Feed:</label>
                      <input class="form-check-input" id='exampleCheck1' type="checkbox" value="0" ng-model=clickcast name="clickcast"/>
                   </div>
-                  <input type="submit"/>
+                  <input ng-click="run()" type="submit"/>
                </form>
             </div>
          </div>
       </div>
       <?php
          // Turn Error Reporting Off for Production
-         error_reporting(0);
-         function test_input($data) {
-           $data = trim($data);
-           $data = stripslashes($data);
-           $data = htmlspecialchars($data);
-           return $data;
-         }
-         if (empty($_POST["url"])) {
-           $url = "";
-         } else{
-           $website = test_input($_POST["url"]);
-           // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-           if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-             echo "Invalid URL"; 
-           }else {
-             $url = $_POST['url'];
-             $u = json_encode((string)$url);
-           }
-         } 
+        //  error_reporting(0);
+        //  function test_input($data) {
+        //    $data = trim($data);
+        //    $data = stripslashes($data);
+        //    $data = htmlspecialchars($data);
+        //    return $data;
+        //  }
+        //  if (empty($_POST["url"])) {
+        //    $url = "";
+        //  } else{
+        //    $website = test_input($_POST["url"]);
+        //    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+        //    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+        //      echo "Invalid URL"; 
+        //    }else {
+        //      $url = $_POST['url'];
+        //      $u = json_encode((string)$url);
+        //    }
+        //  } 
          
-         if (empty($_POST["values"])) {
-           $values = "";
-         } else{
-           $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
-           // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-           if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) {
-             $v = json_encode((string)$_POST['values']);
-             $values = explode(",",$valcheck);
-           }else {
-             echo "Invalid Characters in Values - Only Letters, numbers, whitespaces, dashes, underscores and commas are allowed"; 
-           }
-         } 
-         if(!isset($_POST['clickcast']))
-         {
-           $clickcast = false;
-         } else {
-           $clickcast = true;
-         }
-         // echo $values;
+        //  if (empty($_POST["values"])) {
+        //    $values = "";
+        //  } else{
+        //    $valcheck = preg_replace('/\s+/', '', $_POST["values"]);
+        //    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+        //    if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) {
+        //      $v = json_encode((string)$_POST['values']);
+        //      $values = explode(",",$valcheck);
+        //    }else {
+        //      echo "Invalid Characters in Values - Only Letters, numbers, whitespaces, dashes, underscores and commas are allowed"; 
+        //    }
+        //  } 
+        //  if(!isset($_POST['clickcast']))
+        //  {
+        //    $clickcast = false;
+        //  } else {
+        //    $clickcast = true;
+        //  }
+        //  // echo $values;
          
-         include("scripts/parsexml.php"); 
-         $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
-         //  do I still need this since its in download.php?
-         if (preg_match("/(.gz)$/",$url)){
-           $url = "compress.zlib://" . $url;
-         }
+        //  include("scripts/parsexml.php"); 
+        //  $x = json_encode((new Parsexml($url,$values))->parse($clickcast)); 
+        //  //  do I still need this since its in download.php?
+        //  if (preg_match("/(.gz)$/",$url)){
+        //    $url = "compress.zlib://" . $url;
+        //  }
          
-         // read first part of the xml file for example.htm
-        //  $file = fopen($url,"rb");
-        //  $firstlines = fread($file, 8192);
-        //  fclose($file);
-        //  $y = json_encode((string)$firstlines);
+        //  // read first part of the xml file for example.htm
+        // //  $file = fopen($url,"rb");
+        // //  $firstlines = fread($file, 8192);
+        // //  fclose($file);
+        // //  $y = json_encode((string)$firstlines);
 
-         $handle = fopen($url, "rb");
-         if (FALSE === $handle) {
-          exit("Failed to open stream to URL");
-         }
+        //  $handle = fopen($url, "rb");
+        //  if (FALSE === $handle) {
+        //   exit("Failed to open stream to URL");
+        //  }
 
-         $contents = "";
-         $count = 0;
-         while ($count < 2) {
-            $contents .= fread($handle, 8192);
-            $count ++;
-         }
-         fclose($handle);
-         $y = preg_split('/(<.*?>.*?<\/.*?>)/',$contents,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-        //  $y = explode(">",$contents);
-         $y = json_encode($y);
-         //  echo $y;
+        //  $contents = "";
+        //  $count = 0;
+        //  while ($count < 2) {
+        //     $contents .= fread($handle, 8192);
+        //     $count ++;
+        //  }
+        //  fclose($handle);
+        /* 
+        $y = preg_split('/(<.*?>.*?<\/.*?>)/',$contents,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        */
+          
+        // //  $y = explode(">",$contents);
+        //  $y = json_encode($y);
+        //  //  echo $y;
          
-         //  add price to the model for angular
-         if (empty($_POST["bid"])) {
-           $bid = "";
-         } else{
-           $bidstring = test_input($_POST["bid"]);
-           $bidstring = preg_replace('/\s+/', '', $bidstring);
-           // check if bid address syntax is valid (this regular expression also allows dashes in the bid)
-           if (!preg_match("/[a-z]/i",$bidstring)) {
-             echo "Invalid bid"; 
-           // $bid = $_POST['bid'];
-           }else {
-             $z = json_encode((string)$bidstring);
-           }
-         } 
+        //  //  add price to the model for angular
+        //  if (empty($_POST["bid"])) {
+        //    $bid = "";
+        //  } else{
+        //    $bidstring = test_input($_POST["bid"]);
+        //    $bidstring = preg_replace('/\s+/', '', $bidstring);
+        //    // check if bid address syntax is valid (this regular expression also allows dashes in the bid)
+        //    if (!preg_match("/[a-z]/i",$bidstring)) {
+        //      echo "Invalid bid"; 
+        //    // $bid = $_POST['bid'];
+        //    }else {
+        //      $z = json_encode((string)$bidstring);
+        //    }
+        //  } 
          ?>
-      <span ng-init="jobArr = <?php echo htmlspecialchars($x); ?>; example = <?php echo htmlspecialchars($y); ?>; bidthing = <?php echo htmlspecialchars($z); ?>; url = <?php echo htmlspecialchars($u); ?>; values = <?php echo htmlspecialchars($v); ?>"></span>
+      <!-- <span ng-init="jobArr = <?php //echo htmlspecialchars($x); ?>; example = <?php //echo htmlspecialchars($y); ?>; bidthing = <?php //echo htmlspecialchars($z); ?>; url = <?php //echo htmlspecialchars($u); ?>; values = <?php //echo htmlspecialchars($v); ?>"></span> -->
       <div class="container">
          <div ng-view></div>
       </div>
