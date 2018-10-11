@@ -24,7 +24,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
 
     $scope.createCity = function() {
         if ($scope.citynew.length > 0 && $scope.jobArr.length > 0){
-            // console.log('do nothing for city, its already done');
+            console.log('do nothing for city, its already done');
         }else {
             for(var x=0;x<$scope.jobArr.length;x++){
                 $scope.cityArr.push($scope.jobArr[x]['city']);
@@ -34,7 +34,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     }
     $scope.createTitle = function() {
         if ($scope.titlenew.length > 0 && $scope.jobArr.length > 0){
-            // console.log('do nothing for title, its already done');
+            console.log('do nothing for title, its already done');
         }else {
             for(var x=0;x<$scope.jobArr.length;x++){
                 $scope.titleArr.push($scope.jobArr[x]['title']);
@@ -44,7 +44,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     }
     $scope.createCompany = function() {
         if ($scope.companynew.length > 0 && $scope.jobArr.length > 0){
-            // console.log('do nothing for company, its already done');
+            console.log('do nothing for company, its already done');
         }else {
             for(var x=0;x<$scope.jobArr.length;x++){
                 $scope.companyArr.push($scope.jobArr[x]['company']);
@@ -54,7 +54,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     }
     $scope.createBid = function() {
         if ($scope.pricenew.length > 0 && $scope.jobArr.length > 0){
-            // console.log('do nothing for bid, its already done');
+            console.log('do nothing for bid, its already done');
         }else {
         for(var x=0;x<$scope.jobArr.length;x++){
             $scope.priceArr.push($scope.jobArr[x][$scope.bidthing]);
@@ -181,11 +181,31 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                     console.log(response);
               }, function errorCallback(response) {
                   console.log(response);
-                //   $window.alert('error');
         });
     }
 
+    $scope.firstLinesExampleRun = function() {
+        if ($scope.example.length == 0) {
+            $http({
+                method  : 'GET',
+                url     : "/php/php/scripts/dl_exampleXML.php",
+                timeout : 10000,
+                params  : {
+                    url:$scope.url
+                }
+                }).then(function(response) {
+                        $scope.example = response.data;
+                        console.log($scope.example);
+                        console.log(response);
+                  }, function errorCallback(response) {
+                      console.log(response);
+            });
+        } else {
+            console.log("There's already something in the Example - don't do anything");
+            // console.log($scope.example.length);
+        }
 
+    }
 
 
 

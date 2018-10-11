@@ -56,7 +56,7 @@
                         <a href="#!company" ng-click="createCompany()">COMPANY</a>
                      </li>
                      <li>
-                        <a href="#!example">EXAMPLE</a>
+                        <a href="#!example" ng-click="firstLinesExampleRun()">EXAMPLE</a>
                      </li>
                      <li>
                         <a href="#!advancedGrep" ng-click="setupGrep()">ADVANCED (beta)</a>
@@ -92,10 +92,11 @@
                      <label class="form-label" data-toggle="tooltip" data-placement="right" title="Bid tag must also be a values tag to work">BID TAG (required)  - ex: cpc:</label>
                      <input class="form-control" type="text" placeholder="BID (required)  - ex: cpc" ng-model=bidthing name="bid"/>
                   </div>
-                  <div class="form-group">
+                  <!-- TURNNED OFF BECAUSE NEW DOWNLOAD DOESN'T REQUIRE YOU TO LIST CLICKCAST OR NOT
+                    <div class="form-group">
                      <label class="form-check-label" for='exampleCheck1'>Clickcast Feed:</label>
                      <input class="form-check-input" id='exampleCheck1' type="checkbox" value="0" ng-model=clickcast name="clickcast"/>
-                  </div>
+                  </div> -->
                   <input ng-click="run()" type="submit"/>
                </form>
             </div>

@@ -14,7 +14,7 @@ class Download {
     private $url;
     private $node_arr = array();
     private $setLimit = 50000000;
-    private $node;
+    private $node = "job";
     public $job_arr = array();
 
     public function __construct($url, $node_arr){
@@ -38,7 +38,7 @@ class Download {
     }
 
 //added from better download php
-    public function parse($clickcast = false) 
+    public function parse() 
     {
         if(empty($this->url))
         {
@@ -60,11 +60,11 @@ class Download {
         }
 
         // Check if feed is a clickcast feed
-        if($clickcast == false){
-            $this->node = "job";    
-        }else{
-            $this->node = $xml->jobs->job;
-        }
+        // if($clickcast == false){
+        //     $this->node = "job";    
+        // }else{
+        //     $this->node = "job";
+        // }
 
         if($this->retrieve_remote_file_size($this->url) < $this->setLimit){
 
@@ -109,14 +109,14 @@ class Download {
 
 
 // LOGIC
-
-$c = $_GET['click'];
-//  need to convert the string to a boolean from the api request
-if ($c == 'true') {
-    $c = true;
-} else {
-    $c = false;
-}
+//DONT NEED CLICKCAST INFO ANYMORE
+// $c = $_GET['click'];
+// //  need to convert the string to a boolean from the api request
+// if ($c == 'true') {
+//     $c = true;
+// } else {
+//     $c = false;
+// }
 
 // $u;
 if (empty($_GET["url"])) {
@@ -145,7 +145,7 @@ else
     // check if VAL address syntax is valid (this regular expression also allows dashes in the URL)
     if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) 
     {
-        $v = json_encode((string)$_POST['values']);
+        $v = json_encode((string)$_GET['values']);
         $val = explode(",",$valcheck);
     }
     else 
@@ -157,7 +157,7 @@ else
 // $u = "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml";
 // url:"ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/994_JC_PPA.xml",
 $x = new Download($u,$val);
-$x->parse($c);
+$x->parse();
 echo json_encode($x->job_arr);
  /* 
 start_time=`date +%s`
