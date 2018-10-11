@@ -168,8 +168,8 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     $scope.run = function() {
         $http({
             method  : 'GET',
-                // url     : "/php/php/scripts/newDownload.php",
-                url     : "/php/scripts/newDownload.php",
+                url     : "/php/php/scripts/newDownload.php",
+                // url     : "/php/scripts/newDownload.php",
             timeout : 10000,
             params  : {
                 url:$scope.url,
@@ -189,8 +189,8 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
         if ($scope.example.length == 0) {
             $http({
                 method  : 'GET',
-                // url     : "/php/php/scripts/dl_exampleXML.php",
-                url     : "/php/scripts/dl_exampleXML.php",
+                url     : "/php/php/scripts/dl_exampleXML.php",
+                // url     : "/php/scripts/dl_exampleXML.php",
                 timeout : 10000,
                 params  : {
                     url:$scope.url

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <base href="/php/php/">
       <title>Inner XML Parsing Tool Talroo</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
