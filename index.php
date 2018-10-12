@@ -78,18 +78,21 @@
          <div class="jumbotron">
             <h1> XML Tool
             </h1>
+            <h3 ng-show = "errorMessage" class="alert alert-danger">{{errorMessage}}</h3>
          </div>
       </header>
       <div class="container">
          <div class="row mb-4 box-shadow">
             <div class="pb-5 padd col-xs-12">
-               <form class="form">
+               <form class="form" name="myForm">
                   <div class="form-group">
-                     <input class="form-control" type="text" placeholder="URL (required)" ng-model=url name="url"/>
+                     <input class="form-control" ng-pattern="/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i" type="text" placeholder="URL (required)" name="url" ng-model='url' required />
+                     <span class="red" ng-show="myForm.url.$touched && myForm.url.$invalid">The URL is invalid.</span>
                   </div>
                   <div class="form-group">
                      <label class="form-label">VALUES (required) - ex: title,city,state,cpc:</label>
-                     <input class="form-control" type="text" placeholder="VALUES (required) - ex: title,city,state,cpc" ng-model=values name="values"/>
+                     <input class="form-control" ng-pattern="/^[a-zA-Z0-9,_-]+$/i" type="text" placeholder="VALUES (required) - ex: title,city,state,cpc" ng-model=values name="values"/>
+                     <span class="red" ng-show="myForm.values.$touched && myForm.values.$invalid">The Values field is invalid.</span>
                      <label class="form-label" data-toggle="tooltip" data-placement="right" title="Bid tag must also be a values tag to work">BID TAG (required)  - ex: cpc:</label>
                      <input class="form-control" type="text" placeholder="BID (required)  - ex: cpc" ng-model=bidthing name="bid"/>
                   </div>
@@ -98,7 +101,7 @@
                      <label class="form-check-label" for='exampleCheck1'>Clickcast Feed:</label>
                      <input class="form-check-input" id='exampleCheck1' type="checkbox" value="0" ng-model=clickcast name="clickcast"/>
                   </div> -->
-                  <input ng-click="run()" type="submit"/>
+                  <input ng-disabled="!myForm.$valid" ng-click="run()" type="submit"/>
                </form>
             </div>
          </div>

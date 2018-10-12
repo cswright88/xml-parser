@@ -1,6 +1,7 @@
 var ninjaapp = angular.module('app', ["ngRoute"]);
 ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     $scope.url = "";
+    $scope.errorMessage = "";
     $scope.bidthing = "cpc";
     $scope.values = "title,city,state,company,cpc";
     $scope.clickcast = false;
@@ -21,7 +22,10 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     $scope.companynew=[];
   
 
+    // Form validation
+    
 
+    // Create the different tabs with the model
     $scope.createCity = function() {
         if ($scope.citynew.length > 0 && $scope.jobArr.length > 0){
             console.log('do nothing for city, its already done');
@@ -176,13 +180,30 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                 values:$scope.values,
                 click:$scope.clickcast
             }
-            }).then(function(response) {
+            }).then(function successCallback(response) {
                     $scope.jobArr = response.data;
                     console.log($scope.jobArr);
                     console.log(response);
-              }, function errorCallback(response) {
-                  console.log(response);
-        });
+                    // $scope.errorMessage = response.data;
+            },
+            function errorCallback(er){
+                // var str = "The best things in life are free";
+                
+                var patt = new RegExp('(?<=p0=")(.*)(?=")');
+                var res = patt.exec(unescape(er));
+                $scope.errorMessage = res[0];
+                // console.log(unescape(er));
+            });
+        // empty all the arrays 
+        $scope.errorMessage = "";
+        $scope.cityArr = [];
+        $scope.titleArr = [];
+        $scope.priceArr = [];
+        $scope.companyArr = [];
+        $scope.titlenew=[];
+        $scope.citynew=[];
+        $scope.pricenew=[];
+        $scope.companynew=[];
     }
 
     $scope.firstLinesExampleRun = function() {

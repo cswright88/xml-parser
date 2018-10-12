@@ -42,7 +42,8 @@ class Download {
     {
         if(empty($this->url))
         {
-            die("Please specify xml file to parse.\n");
+            throw new Exception("URL is empty");
+            // die("Please specify xml file to parse.\n");
         }
     
         // $countIx = 0;
@@ -59,13 +60,6 @@ class Download {
             $xml->open($this->url);
         }
 
-        // Check if feed is a clickcast feed
-        // if($clickcast == false){
-        //     $this->node = "job";    
-        // }else{
-        //     $this->node = "job";
-        // }
-
         if($this->retrieve_remote_file_size($this->url) < $this->setLimit){
 
             // $job_arr = array();
@@ -81,14 +75,7 @@ class Download {
                 foreach($this->node_arr as $n) {
                     $job[$n] = strval($element->$n);
                 }
-                // sleep(1);
-                // print_r($job);
-                // echo htmlspecialchars(json_encode($job));
                 array_push($this->job_arr,$job);
-                // print "\n";
-                // $countIx++;
-                // ob_flush(); flush();
-            
                 $xml->next($this->node);
                 unset($element);
             }
@@ -100,7 +87,8 @@ class Download {
             $xml->close();
             // return json_encode($job_arr);
         }else {
-            die("feed too large - please get with someone who knows grep");
+            throw new Exception("Feed is too large - get with someone who knows grep");
+            // die("feed too large - please get with someone who knows grep");
         }
     }  
 }
@@ -110,55 +98,55 @@ class Download {
 
 // LOGIC
 //DONT NEED CLICKCAST INFO ANYMORE
-// $c = $_GET['click'];
-// //  need to convert the string to a boolean from the api request
-// if ($c == 'true') {
-//     $c = true;
-// } else {
-//     $c = false;
-// }
+// TODO: Should throw this in a function and add a try catch error handeling in process for this
 
-// $u;
-if (empty($_GET["url"])) {
-    $url = "";
-} else {
-    $website = $_GET["url"];
-    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-        echo "Invalid URL"; 
+    if (empty($_GET["url"])) {
+        throw new Exception("You must enter a URL");
+        die("must enter url");
+        $url = "";
     } else {
-        // $url = $_GET['url'];
-        $u = $website;
-        // $u = json_encode((string)$url);
-    }
-} 
-
-
-// $u = $_GET['url'];
-// $val = $_GET['values'];
-if (empty($_GET["values"])) {
-    $values = "";
-} 
-else 
-{
-    $valcheck = preg_replace('/\s+/', '', $_GET["values"]);
-    // check if VAL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) 
-    {
-        $v = json_encode((string)$_GET['values']);
-        $val = explode(",",$valcheck);
-    }
+        $website = $_GET["url"];
+        // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+            echo "Invalid URL"; 
+        } else {
+            $u = $website;
+        }
+    } 
+    
+    
+    
+    if (empty($_GET["values"])) {
+        $values = "";
+    } 
     else 
     {
-        echo "Invalid Characters in Values - Only Letters, numbers, whitespaces, dashes, underscores and commas are allowed"; 
+        $valcheck = preg_replace('/\s+/', '', $_GET["values"]);
+        // check if VAL address syntax is valid (this regular expression also allows dashes in the URL)
+        if (preg_match("/^[a-zA-Z0-9,_-]+$/i",$valcheck)) 
+        {
+            $v = json_encode((string)$_GET['values']);
+            $val = explode(",",$valcheck);
+        }
+        else 
+        {
+            echo "Invalid Characters in Values - Only Letters, numbers, whitespaces, dashes, underscores and commas are allowed"; 
+        }
+    } 
+    
+    // $u = "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml";
+    // url:"ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/994_JC_PPA.xml",
+    $x = new Download($u,$val);
+    try {
+        $x->parse();
+    } catch (Exception $e) {
+        echo json_encode($e->getMessage());
     }
-} 
+    echo json_encode($x->job_arr);
 
-// $u = "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml";
-// url:"ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/994_JC_PPA.xml",
-$x = new Download($u,$val);
-$x->parse();
-echo json_encode($x->job_arr);
+
+
+
  /* 
 start_time=`date +%s`
 php download.php
