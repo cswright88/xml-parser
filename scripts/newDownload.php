@@ -134,8 +134,8 @@ class Download {
         }
     } 
     
-    // $u = "ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/1051_JC.xml";
-    // url:"ftp://recruitics:sc1tiurcer@www2.jobs2careers.com/994_JC_PPA.xml",
+
+
     $x = new Download($u,$val);
     try {
         $x->parse();
@@ -143,9 +143,6 @@ class Download {
         echo json_encode($e->getMessage());
     }
     echo json_encode($x->job_arr);
-
-
-
 
  /* 
 start_time=`date +%s`

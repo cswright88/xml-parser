@@ -174,7 +174,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
             method  : 'GET',
                 url     : "/php/php/scripts/newDownload.php",
                 // url     : "/php/scripts/newDownload.php",
-            timeout : 10000,
+            timeout : 60000,
             params  : {
                 url:$scope.url,
                 values:$scope.values,
@@ -212,7 +212,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                 method  : 'GET',
                 url     : "/php/php/scripts/dl_exampleXML.php",
                 // url     : "/php/scripts/dl_exampleXML.php",
-                timeout : 10000,
+                timeout : 60000,
                 params  : {
                     url:$scope.url
                 }
