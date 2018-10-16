@@ -194,8 +194,6 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                 var patt = new RegExp('(?<=p0=")(.*)(?=")');
                 var res = patt.exec(unescape(er));
                 $scope.errorMessage = res[0];
-                $scope.errorMessage = "";
-                // console.log(unescape(er));
             });
         // empty all the arrays 
         $scope.errorMessage = "Loading...";
