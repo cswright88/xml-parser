@@ -2,6 +2,7 @@ var ninjaapp = angular.module('app', ["ngRoute"]);
 ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
     $scope.url = "";
     $scope.errorMessage = "";
+    $scope.toggleLoading = "";
     $scope.bidthing = "cpc";
     $scope.values = "title,city,state,company,cpc";
     $scope.clickcast = false;
@@ -184,6 +185,7 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                     $scope.jobArr = response.data;
                     console.log($scope.jobArr);
                     console.log(response);
+                    $scope.errorMessage = "";
                     // $scope.errorMessage = response.data;
             },
             function errorCallback(er){
@@ -192,10 +194,12 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                 var patt = new RegExp('(?<=p0=")(.*)(?=")');
                 var res = patt.exec(unescape(er));
                 $scope.errorMessage = res[0];
+                $scope.errorMessage = "";
                 // console.log(unescape(er));
             });
         // empty all the arrays 
-        $scope.errorMessage = "";
+        $scope.errorMessage = "Loading...";
+        $scope.toggleLoading = "";
         $scope.cityArr = [];
         $scope.titleArr = [];
         $scope.priceArr = [];

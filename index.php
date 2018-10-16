@@ -79,6 +79,7 @@
             <h1> XML Tool
             </h1>
             <h3 ng-show = "errorMessage" class="alert alert-danger">{{errorMessage}}</h3>
+            <h3 ng-show = "toggleLoading" class="alert alert-info">{{toggleLoading}}</h3>
          </div>
       </header>
       <div class="container">
