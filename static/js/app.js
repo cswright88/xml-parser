@@ -174,7 +174,6 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
         $http({
             method  : 'GET',
                 url     : "/php/php/scripts/newDownload.php",
-                // url     : "/php/scripts/newDownload.php",
             timeout : 60000,
             params  : {
                 url:$scope.url,
@@ -182,18 +181,37 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                 click:$scope.clickcast
             }
             }).then(function successCallback(response) {
-                    $scope.jobArr = response.data;
+                    $scope.jobArr = response.data.data;
                     console.log($scope.jobArr);
                     console.log(response);
-                    $scope.errorMessage = "";
-                    // $scope.errorMessage = response.data;
+                    var str = response.data.message;
+                    var success = new RegExp("success");
+                    var large = new RegExp("Feed is too large - get with someone who knows grep");
+                    var res = success.test(str);
+                    var lg = large.test(str);
+
+                    // Error handeling logic 
+                    // need it to not display success and display a error from the php code first and then display empty job arr error
+                    if (res === false){
+                        if(lg == true){
+                            $scope.errorMessage = response.data.message;
+                        } else {
+                            if(response.data.data.length === 0){
+                                $scope.errorMessage = "Either the Feed is empty or the xml is incorrectly formated for our Import";
+                            } else {
+                                $scope.errorMessage = response.data.message;
+                            }
+                        }
+                    } else {
+                        $scope.errorMessage = "";
+                    }
             },
             function errorCallback(er){
-                // var str = "The best things in life are free";
-                
-                var patt = new RegExp('(?<=p0=")(.*)(?=")');
-                var res = patt.exec(unescape(er));
-                $scope.errorMessage = res[0];
+                console.log(er);
+                $scope.errorMessage = "error will robinson";
+                // var patt = new RegExp('(?<=p0=")(.*)(?=")');
+                // var res = patt.exec(unescape(er));
+                // $scope.errorMessage = res[0];
             });
         // empty all the arrays 
         $scope.errorMessage = "Loading...";
@@ -213,7 +231,6 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
             $http({
                 method  : 'GET',
                 url     : "/php/php/scripts/dl_exampleXML.php",
-                // url     : "/php/scripts/dl_exampleXML.php",
                 timeout : 60000,
                 params  : {
                     url:$scope.url

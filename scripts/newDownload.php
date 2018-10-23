@@ -7,6 +7,8 @@ set clickcast
 set limits 
 
 */
+
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -15,6 +17,7 @@ class Download {
     private $node_arr = array();
     private $setLimit = 50000000;
     private $node = "job";
+    public $response;
     public $job_arr = array();
 
     public function __construct($url, $node_arr){
@@ -40,14 +43,12 @@ class Download {
 //added from better download php
     public function parse() 
     {
+        $this->response['message'] = '';
         if(empty($this->url))
         {
             throw new Exception("URL is empty");
-            // die("Please specify xml file to parse.\n");
+            $this->response['message'] = 'URL is empty';
         }
-    
-        // $countIx = 0;
-    
         $xml = new XMLReader();
 
         if(preg_match("/(.gz)$/",$this->url)) 
@@ -57,12 +58,20 @@ class Download {
         } 
         else 
         {
-            $xml->open($this->url);
+            if($xml->open($this->url) === true) {
+                $xml->open($this->url);
+            } else {
+                $this->response['message'] = 'Problem with the URL';
+            }
         }
 
         if($this->retrieve_remote_file_size($this->url) < $this->setLimit){
 
-            // $job_arr = array();
+            $this->response['message'] = 'success';
+
+            if($xml->read() === false) {
+                $this->response['message'] = 'Problem with the URL';
+            }
 
             while($xml->read() && $xml->name != $this->node) { ; } //skips over nodes we don't need
     
@@ -85,10 +94,8 @@ class Download {
             // print "memory_get_peak_usage() =" . memory_get_peak_usage()/1024 . "kb\n";
             // print "memory_get_peak_usage(true) =" . memory_get_peak_usage(true)/1024 . "kb\n";
             $xml->close();
-            // return json_encode($job_arr);
         }else {
-            throw new Exception("Feed is too large - get with someone who knows grep");
-            // die("feed too large - please get with someone who knows grep");
+            $this->response['message'] = 'Feed is too large - get with someone who knows grep';
         }
     }  
 }
@@ -137,12 +144,9 @@ class Download {
 
 
     $x = new Download($u,$val);
-    try {
-        $x->parse();
-    } catch (Exception $e) {
-        echo json_encode($e->getMessage());
-    }
-    echo json_encode($x->job_arr);
+    $x->parse();
+    $x->response["data"] = $x->job_arr;
+    echo json_encode($x->response);
 
  /* 
 start_time=`date +%s`
