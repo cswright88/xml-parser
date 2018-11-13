@@ -43,6 +43,7 @@ class Download {
 //added from better download php
     public function parse() 
     {
+        error_reporting(0);
         $this->response['message'] = '';
         if(empty($this->url))
         {

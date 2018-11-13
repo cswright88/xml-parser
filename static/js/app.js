@@ -207,7 +207,8 @@ ninjaapp.controller('ctrl', ['$scope','$http', function($scope,$http) {
                     }
             },
             function errorCallback(er){
-                console.log(er);
+                console.log('error');
+                console.log(er.message);
                 $scope.errorMessage = "error will robinson";
                 // var patt = new RegExp('(?<=p0=")(.*)(?=")');
                 // var res = patt.exec(unescape(er));
